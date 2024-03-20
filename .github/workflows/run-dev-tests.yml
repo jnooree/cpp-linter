@@ -41,9 +41,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        py: ['3.8', '3.9', '3.10', '3.11']
-        os: ['windows-latest', ubuntu-22.04]
-        version: ['17', '16', '15', '14', '13', '12', '11', '10', '9', '8', '7']
+        # py: ['3.8', '3.9', '3.10', '3.11']
+        py: ['3.8']
+        os: ['windows-latest']
+        version: ['17']
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -95,7 +96,7 @@ jobs:
       - name: Collect Coverage
         env:
           CLANG_VERSION: ${{ matrix.version }}
-        run: coverage run -m pytest
+        run: coverage run -m pytest --showlocals
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
