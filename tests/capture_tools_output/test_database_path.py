@@ -56,9 +56,9 @@ def test_db_detection(
         format_review=False,
         num_workers=2,
     )
-    stdout = capsys.readouterr().out
-    assert "Error while trying to load a compilation database" not in stdout
-    msg_match = CLANG_TIDY_COMMAND.search(stdout)
+    result = capsys.readouterr()
+    assert "Error while trying to load a compilation database" not in result.out
+    msg_match = CLANG_TIDY_COMMAND.search(result.out)
     if msg_match is None:  # pragma: no cover
         pytest.fail("failed to find args passed in clang-tidy in log records")
     matched_args = msg_match.group(0).split()[1:]

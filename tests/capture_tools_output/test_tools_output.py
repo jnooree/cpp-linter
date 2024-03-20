@@ -485,8 +485,8 @@ def test_tidy_extra_args(capsys: pytest.CaptureFixture, user_input: List[str]):
         format_review=False,
         num_workers=2,
     )
-    stdout = capsys.readouterr().out
-    msg_match = CLANG_TIDY_COMMAND.search(stdout)
+    result = capsys.readouterr()
+    msg_match = CLANG_TIDY_COMMAND.search(result.out)
     if msg_match is None:  # pragma: no cover
         raise RuntimeError("failed to find args passed in clang-tidy in log records")
     matched_args = msg_match.group(0).split()[1:]
